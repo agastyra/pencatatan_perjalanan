@@ -3,7 +3,7 @@
 @section('container')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h2">Welcome, {{ auth()->user()->nama }}</h1>
         </div>
 
         @if (session()->has('success'))
@@ -13,29 +13,31 @@
             </div>
         @endif
 
-        <a href="/dashboard/create" class="btn btn-primary mb-3">Tambah Data</a>
+        <a href="/dashboard/create" class="btn btn-primary mb-3">Buat Perjalanan</a>
 
-        <div class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Tujuan</th>
-                        <th scope="col">Keperluan</th>
-                        <th scope="col">Suhu Tubuh</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>random</td>
-                        <td>data</td>
-                        <td>placeholder</td>
-                        <td>text</td>
-                    </tr>
-                </tbody>
-            </table>
+        @if ($histories->count() > 0)
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tanggal</th>
+                            <th scope="col">Tujuan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($histories as $history)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $history->tanggal }}</td>
+                                <td>{{ $history->tujuan }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <h6 class="text-center text-muted">Tidak ada perjalanan</h6>
+        @endif
         </div>
     </main>
 @endsection

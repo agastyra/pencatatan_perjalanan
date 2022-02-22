@@ -10,7 +10,8 @@ class DashboardController extends Controller
     public function index()
     {
         return view('dashboard.index', [
-            'judul' => 'Dashboard'
+            'judul' => 'Dashboard',
+            'histories' => Perjalanan::whereId(auth()->user()->id)->orderBy('tanggal', 'desc')->get()
         ]);
     }
 
