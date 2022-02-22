@@ -66,7 +66,7 @@
             </div>
             <div class="row align-items-center mb-5">
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Tambah data</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
                 <div class="col">
                     <a href="/dashboard" class="text-muted text-decoration-none">Batal</a>

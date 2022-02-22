@@ -10,6 +10,13 @@
                 <button type="button" data-bs-dismiss="alert" class="btn-close"></button>
             </div>
         @endif
+        @if (session()->has('failed'))
+            <div class="alert alert-danger alert-dismissible fade show col col-lg-4 offset-lg-4 m-sm-5 m-lg-auto"
+                role="alert">
+                {{ session('failed') }}
+                <button type="button" data-bs-dismiss="alert" class="btn-close"></button>
+            </div>
+        @endif
         <form action="/login" method="POST" class="col col-lg-4 offset-lg-4 m-sm-5 m-lg-auto">
             @csrf
             <div class="my-3 row align-items-center">
