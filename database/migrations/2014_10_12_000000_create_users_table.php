@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->date('tanggal_lahir');
-            $table->string('telp', 14)->unique();
+            $table->string('telp', 25)->unique();
             $table->string('email')->unique();
             $table->text('alamat');
             $table->integer('id_level')->default(3);

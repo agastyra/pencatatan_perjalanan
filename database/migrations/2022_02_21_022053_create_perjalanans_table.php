@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tujuan');
             $table->text('keperluan');
             $table->double('suhu_tubuh');
+            $table->string('slug')->default('slug');
         });
     }
 
