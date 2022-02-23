@@ -9,9 +9,18 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $perjalanans = Perjalanan::where('id_user', auth()->user()->id);
+
+        if (request('q')) {
+            $perjalanans =
+                Perjalanan::where('id_user', auth()->user()->id)
+                ->where('tujuan', 'like', '%' . request('q') . '%')
+                ->orWhere('keperluan', 'like', '%' . request('q') . '%');
+        }
+
         return view('dashboard.index', [
             'judul' => 'Dashboard',
-            'histories' => Perjalanan::whereId(auth()->user()->id)->orderBy('tanggal', 'desc')->get()
+            'perjalanans' => $perjalanans->orderBy('tanggal', 'desc')->get()
         ]);
     }
 
@@ -34,6 +43,8 @@ class DashboardController extends Controller
         $validatedData = $request->validate($rules);
 
         $validatedData['id_user'] = auth()->user()->id;
+
+        $validatedData['slug'] = auth()->user()->id . "-$request->tanggal";
 
         Perjalanan::create($validatedData);
 

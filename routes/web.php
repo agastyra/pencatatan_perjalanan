@@ -20,8 +20,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+
 Route::post('/login', [LoginController::class, 'authenticate']);
+
 Route::post('/logout', [LoginController::class, 'logout']);
+
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+
 Route::post('/register', [RegisterController::class, 'store']);
-Route::resource('/dashboard', DashboardController::class)->middleware('auth');
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/dashboard/create', [DashboardController::class, 'create']);
+Route::post('/dashboard', [DashboardController::class, 'store']);
