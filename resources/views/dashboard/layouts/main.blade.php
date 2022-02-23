@@ -32,6 +32,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
     {{-- Favicon --}}
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">

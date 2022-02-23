@@ -2,15 +2,9 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                    <span data-feather="home"></span>
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file"></span>
-                    Orders
+                <a class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}" href="/dashboard">
+                    <i class="bi bi-house"></i>
+                    Beranda
                 </a>
             </li>
         </ul>
