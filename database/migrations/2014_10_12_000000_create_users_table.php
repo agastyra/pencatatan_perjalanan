@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->text('alamat');
             $table->integer('id_level')->default(3);
+            $table->timestamps();
         });
     }
 

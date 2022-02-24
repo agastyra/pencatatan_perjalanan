@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('keperluan');
             $table->double('suhu_tubuh');
             $table->string('slug')->default('slug');
+            $table->timestamps();
         });
     }
 
