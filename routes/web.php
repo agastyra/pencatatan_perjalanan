@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardPerjalananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardPerjalananController::class, 'index'])->middleware('auth');
 
-Route::get('/dashboard/create', [DashboardController::class, 'create']);
-Route::post('/dashboard', [DashboardController::class, 'store']);
+Route::get('/dashboard/create', [DashboardPerjalananController::class, 'create'])->middleware('auth');
+Route::post('/dashboard', [DashboardPerjalananController::class, 'store'])->middleware('auth');
