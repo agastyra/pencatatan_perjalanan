@@ -12,8 +12,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public $timestamps = false;
     protected $guarded = [
         'id'
     ];
+
+    public function perjalanan()
+    {
+        return $this->hasMany(Perjalanan::class);
+    }
 }

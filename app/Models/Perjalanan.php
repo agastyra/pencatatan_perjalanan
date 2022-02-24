@@ -9,8 +9,13 @@ class Perjalanan extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    protected $with = ['user'];
     protected $guarded = [
         'id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }
