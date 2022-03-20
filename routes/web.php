@@ -32,8 +32,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardPerjalananController::class, 'index'])->middleware('auth');
 
-Route::get('/dashboard/create', [DashboardPerjalananController::class, 'create'])->middleware('auth');
-Route::post('/dashboard', [DashboardPerjalananController::class, 'store'])->middleware('auth');
+Route::get('/dashboard/create', [DashboardPerjalananController::class, 'create'])->middleware('user');
+Route::post('/dashboard', [DashboardPerjalananController::class, 'store'])->middleware('user');
 
-Route::get('/dashboard/admins', [UserController::class, 'index'])->middleware('superadmin');
-Route::get('/dashboard/users', [UserController::class, 'index'])->middleware('admin');
+Route::get('/dashboard/admins', [UserController::class, 'admin'])->middleware('superadmin');
+Route::get('/dashboard/users', [UserController::class, 'index'])->middleware('administrator');
