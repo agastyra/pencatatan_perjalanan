@@ -20,6 +20,8 @@
         <div class="row">
             <div class="col-lg">
                 <a href="/dashboard/create" class="btn btn-primary mb-3">Buat Perjalanan</a>
+                @endcan
+                <a href="" class="btn btn-success mb-3">Export</a>
             </div>
         </div>
 
