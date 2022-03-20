@@ -17,7 +17,7 @@ class PerjalananFactory extends Factory
     public function definition()
     {
         return [
-            'id_user' => 11,
+            'id_user' => 1,
             'tanggal' => $this->faker->date(),
             'tujuan' => $this->faker->words(3, true),
             'keperluan' => $this->faker->sentence(3),
