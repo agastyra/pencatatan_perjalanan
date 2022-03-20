@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPerjalananController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::get('/dashboard', [DashboardPerjalananController::class, 'index'])->middl
 
 Route::get('/dashboard/create', [DashboardPerjalananController::class, 'create'])->middleware('auth');
 Route::post('/dashboard', [DashboardPerjalananController::class, 'store'])->middleware('auth');
+
+Route::get('/dashboard/admins', [UserController::class, 'index'])->middleware('superadmin');
+Route::get('/dashboard/users', [UserController::class, 'index'])->middleware('admin');
