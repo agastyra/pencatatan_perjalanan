@@ -19,7 +19,8 @@
 
         <div class="row">
             <div class="col-lg">
-                <a href="/dashboard/create" class="btn btn-primary mb-3">Buat Perjalanan</a>
+                @can('user')
+                    <a href="/dashboard/create" class="btn btn-primary mb-3">Buat Perjalanan</a>
                 @endcan
                 <a href="" class="btn btn-success mb-3">Export</a>
             </div>
@@ -62,11 +63,9 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Tanggal</th>
-                                <th scope="col">NIK</th>
                                 <th scope="col">Nama</th>
-                                <th scope="col">Suhu tubuh</th>
                                 <th scope="col">Tujuan</th>
-                                <th scope="col">Keperluan</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,12 +73,18 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $perjalanan->tanggal }}</td>
-                                    <td>{{ $perjalanan->nik }}</td>
                                     <td>{{ $perjalanan->nama }}</td>
-                                    <td>{{ $perjalanan->suhu_tubuh }}</td>
                                     <td>{{ $perjalanan->tujuan }}</td>
-                                    <td>{{ $perjalanan->keperluan }}</td>
-                                    <td></td>
+                                    <td>
+                                        <a href="" class="badge bg-info"><i class="bi bi-eye"></i></a>
+                                        <form action="" method="POST" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="badge bg-danger border-0"
+                                                onclick="return confirm('Are you sure ?')"><i
+                                                    class="bi bi-trash3"></i></button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
