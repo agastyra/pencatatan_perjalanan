@@ -31,6 +31,7 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardPerjalananController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/print', [DashboardPerjalananController::class, 'print'])->middleware('auth');
 
 Route::get('/dashboard/create', [DashboardPerjalananController::class, 'create'])->middleware('user');
 Route::post('/dashboard', [DashboardPerjalananController::class, 'store'])->middleware('user');

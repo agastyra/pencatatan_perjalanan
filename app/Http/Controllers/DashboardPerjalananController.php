@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Perjalanan;
 use Illuminate\Http\Request;
+use \Barryvdh\DomPDF\Facade\Pdf;
 
 class DashboardPerjalananController extends Controller
 {
@@ -75,5 +76,50 @@ class DashboardPerjalananController extends Controller
         Perjalanan::create($validatedData);
 
         return redirect('/dashboard')->with('success', 'Data telah ditambahkan');
+    }
+
+    public function print()
+    {
+        $perjalanans = Perjalanan::latest()->where('id_user', auth()->user()->id);
+
+        if (request('q')) {
+            $perjalanans =
+                Perjalanan::latest()->where('id_user', auth()->user()->id)
+                ->where('tujuan', 'like', '%' . request('q') . '%')
+                ->orWhere('keperluan', 'like', '%' . request('q') . '%');
+        }
+
+        if (auth()->user()->id_level !== 3) {
+            $perjalanans = Perjalanan::join('users', 'perjalanans.id_user', '=', 'users.id')
+                ->select(
+                    'perjalanans.id',
+                    'perjalanans.id_user',
+                    'perjalanans.tanggal',
+                    'perjalanans.suhu_tubuh',
+                    'perjalanans.tujuan',
+                    'perjalanans.keperluan',
+                    'perjalanans.created_at',
+                    'users.id',
+                    'users.nik',
+                    'users.nama',
+                )
+                ->orderBy('perjalanans.created_at', 'desc');
+
+            if (request('q')) {
+                $perjalanans =
+                    $perjalanans->where('perjalanans.tujuan', 'like', '%' . request('q') . '%')
+                    ->orWhere('perjalanans.keperluan', 'like', '%' . request('q') . '%')
+                    ->orWhere('users.nik', 'like', '%' . request('q') . '%')
+                    ->orWhere('users.nama', 'like', '%' . request('q') . '%')
+                    ->orderBy('perjalanans.created_at', 'desc');
+            }
+        }
+
+        $pdf = PDF::loadview('dashboard.print', [
+            'perjalanans' => $perjalanans->get(),
+            'judul' => 'Print View'
+        ]);
+
+        return $pdf->stream();
     }
 }

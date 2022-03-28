@@ -22,7 +22,8 @@
                 @can('user')
                     <a href="/dashboard/create" class="btn btn-primary mb-3">Buat Perjalanan</a>
                 @endcan
-                <a href="" class="btn btn-success mb-3">Export</a>
+                <a href="/dashboard/print?q={{ request('q') }}"
+                    class="btn btn-success mb-3 @if ($perjalanans->count() < 1) disabled @endif" target="_blank">Export</a>
             </div>
         </div>
 
